@@ -2,42 +2,45 @@ create database disqueria;
 
 use disqueria;
 
+DROP DATABASE base_de_datos;
+
+
 create table genero (
     id_genero int not null auto_increment primary key,
-    nombre varchar(50)
+    nombre_genero varchar(50)
 );
 
 create table discografica(
     id_discografica int not null auto_increment primary key,
-    nombre varchar(50)
+    nombre_discografia varchar(50)
 );
 
 create table formato(
     id_formato int not null auto_increment primary key,
-    tipo varchar(50)
+    tipo_formato varchar(50)
 );
 
 create table interprete(
     id_interprete int not null auto_increment primary key,
-    nombre varchar(50),
-    apellido varchar(50),
-    nacionalidad varchar(50),
-    foto varchar(100)
+    nombre_interprete varchar(50),
+    apellido_interprete varchar(50),
+    nacionalidad_interprete varchar(50),
+    foto_interprete varchar(100)
 );
 
 create table album(
     id_album int auto_increment primary key,
     cod_album int not null,
-    nombre varchar(100) not null,
+    nombre_album varchar(100) not null,
     id_interprete int not null,
     id_genero int not null,
     cant_temas int not null,
     id_discografica int not null,
     id_formato int not null,
     fec_lanzamiento date,
-    precio real not null,
-    cantidad int not null,
-    caratula varchar(100),
+    precio_album real not null,
+    cantidad_album int not null,
+    caratula_caratula varchar(100),
     foreign key(id_genero) references genero(id_genero),
     foreign key(id_discografica) references discografica(id_discografica),
     foreign key(id_formato) references formato(id_formato)
@@ -45,10 +48,10 @@ create table album(
 
 create table tema(
         id_tema int auto_increment primary key,
-        titulo varchar(100),
-        duracion time,
-        autor varchar(100) not null,
-        compositor varchar(100) not null,
+        titulo_tema varchar(100),
+        duracion_tema time,
+        autor_tema varchar(100) not null,
+        compositor_tema varchar(100) not null,
         id_album int,
         id_interprete int,
         foreign key(id_album) references album(id_album),

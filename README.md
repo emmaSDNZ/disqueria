@@ -4,6 +4,8 @@
 
  pip install uvicorn
 
- uvicorn app:app   
 
- uvicorn app:app --reload
+ uvicorn main:app --reload
+
+
+ DROP DATABASE base_de_datos;
