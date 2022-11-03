@@ -46,6 +46,8 @@ create table album(
     foreign key(id_formato) references formato(id_formato)
     ); 
 
+#insert into album values (null,1234567,'Lêttre à ma Mère',3,5,10,5,3,'1979-01-01',1000,2,null);
+
 create table tema(
         id_tema int auto_increment primary key,
         titulo_tema varchar(100),

@@ -47,7 +47,7 @@ def deleteGeneroId(id):
     mycursor.execute(sql)
     mydb.commit()
 
-    return {"DELETED"}
+    return { "DELETED" }
 
 
 
