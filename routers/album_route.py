@@ -6,7 +6,8 @@ album = APIRouter()
 
 
 @album.get('/api/album')
-def getAllbum():
+def get_All_Album( param = "id_album", order = "ASC"  ):
+    
     mycursor.execute(
         "select id_album, cod_album, nombre_album,   \
         nombre_interprete, apellido_interprete, nacionalidad_interprete, \
@@ -21,12 +22,34 @@ def getAllbum():
         inner join discografica \
         on album.id_discografica = discografica.id_discografica \
         inner join formato \
-        on album.id_interprete = formato.id_formato;")
+        on album.id_interprete = formato.id_formato ORDER BY " + param + " " + order +";")
 
     myresult = mycursor.fetchall()
     return myresult
 
+@album.get('/api/album/search')
+def get_Album_search( params, search ):
+    print (search)
+    mycursor.execute(
+        "select id_album, cod_album, nombre_album,   \
+        nombre_interprete, apellido_interprete, nacionalidad_interprete, \
+        foto_interprete, nombre_genero, caratula_caratula \
+        cant_temas, nombre_discografia, tipo_formato, \
+        fec_lanzamiento, precio_album, cantidad_album \
+        from album \
+        inner join interprete \
+        on album.id_interprete = interprete.id_interprete \
+        inner join genero \
+        on album.id_genero = genero.id_genero \
+        inner join discografica \
+        on album.id_discografica = discografica.id_discografica \
+        inner join formato \
+        on album.id_interprete = formato.id_formato  \
+        WHERE "+ str(params) +" LIKE '%"+ str(search) +"%' ;")
 
+    myresult = mycursor.fetchall()
+    return myresult    
+ 
 @album.get('/api/album/{id}', )
 def getAlbumId( id: str ):
 
@@ -63,7 +86,42 @@ def create_Album( album: AlbumSchema ):
 
 
 
+
+
+"""
+        id_album, cod_album, nombre_album,   \
+        nombre_interprete, apellido_interprete, nacionalidad_interprete, \
+        foto_interprete, nombre_genero, caratula_caratula \
+        cant_temas, nombre_discografia, tipo_formato, \
+        fec_lanzamiento, precio_album, cantidad_album \
+        from album \
+        inner join interprete \
+        ON album.id_interprete = interprete.id_interprete \
+        inner join genero \
+        ON album.id_genero = genero.id_genero \
+        inner join discografica \
+        ON album.id_discografica = discografica.id_discografica \
+        inner join formato \
+        ON album.id_interprete = formato.id_formato  \
+        SET   
+        album.id_interprete = value,
+        album.in
+
+"""
+
 """ 
+    update libros 
+
+    join editoriales 
+
+    on libros.codigoeditorial=editoriales.codigo
+
+    set libro.codigoeditorial=9, editorial.codigo=9
+
+    where editorial.nombre='Emece';
+
+
+
     {
   "cod_album": 12345675,
   "nombre_album": "string",
